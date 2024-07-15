@@ -1,0 +1,12 @@
+.selected {
+  border: 1px solid black;
+  padding: 4px;
+}
+
+.menu {
+  border: 1px solid black;
+}
+
+.item {
+  padding: 4px;
+}
