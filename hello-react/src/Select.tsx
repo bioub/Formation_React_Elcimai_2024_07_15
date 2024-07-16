@@ -7,7 +7,7 @@ type Props = {
   onSelected(v: string): void;
 };
 
-function Select({ items, selected, onSelected }: Props) {
+function Select({ items, selected, onSelected }: Readonly<Props>) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   function handleItemClick(item: string) {

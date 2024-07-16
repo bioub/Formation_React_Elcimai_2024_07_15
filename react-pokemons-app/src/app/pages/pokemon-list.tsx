@@ -5,8 +5,11 @@ import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
+import { useCompare } from '../compare-context';
+import clsx from 'clsx';
 
 function PokemonList() {
+  const { pokemonIdsToCompare } = useCompare();
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
@@ -28,8 +31,9 @@ function PokemonList() {
           ))}
         </div>
       </div>
-      <Link
-        className="btn-floating btn-large waves-effect waves-light blue z-depth-3"
+    <Link
+
+        className={clsx("btn-floating btn-large waves-effect waves-light blue z-depth-3", pokemonIdsToCompare.length !== 2 && 'disabled')}
         style={{ position: 'fixed', bottom: '25px', right: '100px' }}
         to="/pokemon/compare"
       >

@@ -3,6 +3,8 @@ import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
 import { MouseEvent } from 'react';
+import { useCompare } from '../compare-context';
+import clsx from 'clsx';
 
 type Props = {
   pokemon: Pokemon;
@@ -11,6 +13,7 @@ type Props = {
 
 function PokemonCard({ pokemon }: Props) {
   const navigate = useNavigate();
+  const { pokemonIdsToCompare, toggleId } = useCompare();
 
   function goToPokemon(id: number) {
     navigate(`/pokemons/${id}`);
@@ -22,7 +25,7 @@ function PokemonCard({ pokemon }: Props) {
   }
 
   return (
-    <div className="col s6 m4">
+    <div className={clsx("col s6 m4", pokemonIdsToCompare.includes(pokemon.id!) && 'blue')} onClick={() => toggleId(pokemon.id!)}>
       <div className="card horizontal">
         <div className="card-image">
           <img src={pokemon.picture} alt={pokemon.name} />
