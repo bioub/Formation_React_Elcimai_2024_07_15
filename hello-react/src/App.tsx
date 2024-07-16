@@ -25,7 +25,7 @@ function App() {
           count is {count}
         </button>
         <Select items={['75', '77']} selected={departement} onSelected={handleSelectedDepartement} />
-        <Select items={villes} selected={ville} onSelected={setVille} componentRef={selectDeptRef} />
+        <Select items={villes} selected={ville} onSelected={setVille} componentRef={selectDeptRef} renderItem={(item) => <><input type="checkbox" defaultChecked={item === ville} />{item}</>} />
     </>
   )
 }

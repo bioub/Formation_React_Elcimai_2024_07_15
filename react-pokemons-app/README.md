@@ -42,3 +42,37 @@ Créer un context `CompareContext` en s'inspirant de l'exemple :
 L'idée est de stocker les id des pokemons à comparer dans le context (en utilisant par exemple un tableau), il faudra limiter à 2 pokemons (vous pouvez augmenter la limite si vous le souhaitez mais il faudra jouer sur le nombre de colonnes dans la page `PokemonCompare`).
 
 Dans `src/app/components/pokemon-card.tsx` écouter le click de la carte (là où vous aviez déplacé le onClick dans l'exercice précédent) pour sélectionner ou déselectionner le Pokemon à comparer. Le lien vers la page `/pokemons/compare` ne devrait être actif que s'il y a 2 pokemons à comparer.
+
+## Fragments + Render Props
+
+Créer un nouveau composant List dans `src/app/components/list.tsx` en partant du code suivant :
+
+```
+import { ReactNode } from 'react';
+
+type Props<T> = {
+  items: T[];
+  renderItem(item: T): ReactNode;
+};
+
+function List<T>({ items, renderItem }: Props<T>) {
+
+}
+
+export default List;
+```
+
+Ce composant List est générique, il se typera automatiquement avec le type d'élément passé en props à items, ex :
+
+```
+<List items={['Rouge', 'Vert', 'Bleu']} renderItem={(element) => <div></div>} />
+````
+
+Dans l'exemple ci-dessus on passe le type `string[]` à items, le type de `element` dans `renderItem` sera donc automatiquement `string`.
+
+Dans ce composant List nous allons boucler sur les items et afficher dans le JSX le retour de la fonction `renderItem`, ce JSX sera encapsulé dans un Fragment.
+
+Utiliser ce composant List à la place de `pokemons.map` dans le composant `src/app/pages/pokemon-list.tsx` (on verra demain l'intérêt d'avoir un composant ici)
+
+Bonus : utiliser aussi ce composant pour les types dans `PokemonForm`
+

@@ -1,18 +1,19 @@
-import { Ref, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { ReactNode, Ref, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './Select.module.css';
 
 type Props = {
   items: string[];
   selected: string;
   onSelected(v: string): void;
-  componentRef?: Ref<SelectRef>
+  componentRef?: Ref<SelectRef>;
+  renderItem?(item: string): ReactNode;
 };
 
 export interface SelectRef {
   openMenu(): void;
 }
 
-function Select({ items, selected, onSelected, componentRef }: Readonly<Props>) {
+function Select({ items, selected, onSelected, componentRef, renderItem }: Readonly<Props>) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const hostRef = useRef<HTMLDivElement>(null);
 
@@ -50,7 +51,7 @@ function Select({ items, selected, onSelected, componentRef }: Readonly<Props>) 
               className={styles.item}
               onClick={() => handleItemClick(item)}
             >
-              {item}
+              {renderItem ? renderItem(item) : item}
             </div>
           ))}
         </div>
