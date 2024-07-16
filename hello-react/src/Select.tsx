@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react';
+import { Ref, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './Select.module.css';
 
 type Props = {
   items: string[];
   selected: string;
   onSelected(v: string): void;
+  componentRef?: Ref<SelectRef>
 };
 
-function Select({ items, selected, onSelected }: Readonly<Props>) {
+export interface SelectRef {
+  openMenu(): void;
+}
+
+function Select({ items, selected, onSelected, componentRef }: Readonly<Props>) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const hostRef = useRef<HTMLDivElement>(null);
 
   function handleItemClick(item: string) {
     onSelected(item);
@@ -16,8 +22,10 @@ function Select({ items, selected, onSelected }: Readonly<Props>) {
   }
 
   useEffect(() => {
-    function windowClickListener() {
-      setMenuIsOpen(false);
+    function windowClickListener(event: MouseEvent) {
+      if (!hostRef.current?.contains(event.target as Element)) {
+        setMenuIsOpen(false);
+      } 
     }
     window.addEventListener('click', windowClickListener, { capture: true })
     return () => {
@@ -25,8 +33,14 @@ function Select({ items, selected, onSelected }: Readonly<Props>) {
     }
   }, [])
 
+  useImperativeHandle(componentRef, () => ({
+    openMenu() {
+      setMenuIsOpen(true);
+    }
+  }), []);
+
   return (
-    <div className="Select" onClick={() => setMenuIsOpen(!menuIsOpen)}>
+    <div ref={hostRef} className="Select" onClick={() => setMenuIsOpen(!menuIsOpen)}>
       <div className={styles.selected}>{selected}</div>
       {menuIsOpen && (
         <div className={styles.menu}>
