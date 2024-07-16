@@ -7,6 +7,7 @@ import {
   deletePokemon,
   updatePokemon,
 } from '../services/pokemon-service';
+import List from './list';
 
 type Props = {
   pokemon: Pokemon;
@@ -323,25 +324,29 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
                 {/* Pokemon types */}
                 <div className="form-group">
                   <label>Types</label>
-                  {types.map((type) => (
-                    <div key={type} style={{ marginBottom: '10px' }}>
-                      <label>
-                        <input
-                          id={type}
-                          type="checkbox"
-                          name="types"
-                          className="filled-in"
-                          value={type}
-                          checked={hasType(type)}
-                          disabled={!isTypesValid(type)}
-                          onChange={(e) => selectType(type, e)}
-                        ></input>
-                        <span>
-                          <p className={formatType(type)}>{type}</p>
-                        </span>
-                      </label>
-                    </div>
-                  ))}
+
+                  <List
+                    items={types}
+                    renderItem={(type) => (
+                      <div key={type} style={{ marginBottom: '10px' }}>
+                        <label>
+                          <input
+                            id={type}
+                            type="checkbox"
+                            name="types"
+                            className="filled-in"
+                            value={type}
+                            checked={hasType(type)}
+                            disabled={!isTypesValid(type)}
+                            onChange={(e) => selectType(type, e)}
+                          ></input>
+                          <span>
+                            <p className={formatType(type)}>{type}</p>
+                          </span>
+                        </label>
+                      </div>
+                    )}
+                  />
                 </div>
               </div>
               <div className="card-action center">

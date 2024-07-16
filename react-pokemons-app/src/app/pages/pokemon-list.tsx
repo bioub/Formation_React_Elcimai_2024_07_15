@@ -7,6 +7,7 @@ import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
 import { useCompare } from '../compare-context';
 import clsx from 'clsx';
+import List from '../components/list';
 
 function PokemonList() {
   const { pokemonIdsToCompare } = useCompare();
@@ -26,9 +27,10 @@ function PokemonList() {
       <div className="container">
         <div className="row">
           <PokemonSearch />
-          {pokemons.map((pokemon) => (
+          {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
-          ))}
+          ))} */}
+          <List items={pokemons} renderItem={(pokemon) => <PokemonCard key={pokemon.id} pokemon={pokemon} />} />
         </div>
       </div>
     <Link
