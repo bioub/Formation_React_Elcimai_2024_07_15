@@ -10,6 +10,8 @@ import clsx from 'clsx';
 import List from '../components/list';
 
 function PokemonList() {
+  console.log('render PokemonList');
+  
   const { pokemonIdsToCompare } = useCompare();
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
@@ -30,7 +32,7 @@ function PokemonList() {
           {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))} */}
-          <List items={pokemons} renderItem={(pokemon) => <PokemonCard key={pokemon.id} pokemon={pokemon} />} />
+          <List items={pokemons} renderItem={(pokemon: Pokemon) => <PokemonCard key={pokemon.id} pokemon={pokemon} />} />
         </div>
       </div>
     <Link

@@ -327,7 +327,7 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
 
                   <List
                     items={types}
-                    renderItem={(type) => (
+                    renderItem={(type: pokemonTypes) => (
                       <div key={type} style={{ marginBottom: '10px' }}>
                         <label>
                           <input
