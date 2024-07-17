@@ -1,46 +1,22 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import PokemonCardDetails from '../components/pokemon-card-details';
-import { getPokemon } from '../services/pokemon-service';
-import { Pokemon } from '../models/pokemon';
-import { useCompare } from '../compare-context';
-
+import { useSelector } from 'react-redux';
+import { pokemonsToCompareSelector } from '../store/pokemonsSlice';
 function PokemonCompare(): ReactNode {
-  const [pokemon1, setPokemon1] = useState<Pokemon>();
-  const [pokemon2, setPokemon2] = useState<Pokemon>();
-  console.log('render PokemonCompare');
-  const { pokemonIdsToCompare } = useCompare();
+  const pokemonsToCompare = useSelector(pokemonsToCompareSelector);
 
-  useEffect(() => {
-    console.log('useEffect PokemonCompare');
-    
-    Promise.all([
-      getPokemon(pokemonIdsToCompare[0]),
-      getPokemon(pokemonIdsToCompare[1]),
-    ]).then(([pokemon1, pokemon2]) => {
-      setPokemon1(pokemon1);
-      setPokemon2(pokemon2);
-    })
-    // getPokemon(1).then((pokemon1) => {
-    //   setPokemon1(pokemon1);
-    // })
-    // getPokemon(2).then((pokemon2) => {
-    //   setPokemon2(pokemon2);
-    // })
-  }, []);
-
-  if (!pokemon1 || !pokemon2) {
+  if (pokemonsToCompare.length !== 2) {
     return null;
   }
 
   return (
     <div className="PokemonCompare">
       <div className="row">
-        <div className="col s6">
-          <PokemonCardDetails pokemon={pokemon1} />
-        </div>
-        <div className="col s6">
-          <PokemonCardDetails pokemon={pokemon2} />
-        </div>
+        {pokemonsToCompare.map((pokemon) => (
+          <div className="col s6" key={pokemon!.id}>
+            <PokemonCardDetails pokemon={pokemon!} />
+          </div>
+        ))}
       </div>
     </div>
   );

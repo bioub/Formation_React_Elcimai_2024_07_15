@@ -5,17 +5,16 @@ import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
-import { useCompare } from '../compare-context';
 import clsx from 'clsx';
 import List from '../components/list';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/state';
-import { filteredPokemonsSelector, requestPokemons, requestPokemonsSuccess } from '../store/pokemonsSlice';
+import { filteredPokemonsSelector, idsToCompareSelector, requestPokemons, requestPokemonsSuccess } from '../store/pokemonsSlice';
 
 function PokemonList() {
   console.log('render PokemonList');
   
-  const { pokemonIdsToCompare } = useCompare();
+  const pokemonIdsToCompare = useSelector(idsToCompareSelector);
   // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const pokemons = useSelector<RootState, Pokemon[]>(filteredPokemonsSelector);
   const dispatch = useDispatch<AppDispatch>();
