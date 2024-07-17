@@ -5,7 +5,7 @@ import { searchPokemon } from '../services/pokemon-service';
 import List from './list';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/state';
-import { setTerm } from '../store/pokemonsSlice';
+import { setTerm, termSelector } from '../store/pokemonsSlice';
 
 
 
@@ -15,7 +15,7 @@ function PokemonSearch() {
   // const [term, setTerm] = useState('');
   // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-  const term = useSelector<RootState, string>((state) => state.pokemons.term);
+  const term = useSelector<RootState, string>(termSelector);
   // const pokemons = useSelector<RootState, Pokemon[]>((state) => state.pokemons.items.filter((item) => item.name?.includes(state.pokemons.term)));
   const dispatch = useDispatch<AppDispatch>();
 

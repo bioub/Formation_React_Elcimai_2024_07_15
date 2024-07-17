@@ -10,14 +10,14 @@ import clsx from 'clsx';
 import List from '../components/list';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/state';
-import { requestPokemons, requestPokemonsSuccess } from '../store/pokemonsSlice';
+import { filteredPokemonsSelector, requestPokemons, requestPokemonsSuccess } from '../store/pokemonsSlice';
 
 function PokemonList() {
   console.log('render PokemonList');
   
   const { pokemonIdsToCompare } = useCompare();
   // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const pokemons = useSelector<RootState, Pokemon[]>((state) => state.pokemons.items.filter((item) => item.name?.toLocaleLowerCase().includes(state.pokemons.term.toLocaleLowerCase())));
+  const pokemons = useSelector<RootState, Pokemon[]>(filteredPokemonsSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
