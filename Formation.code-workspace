@@ -13,5 +13,7 @@
 			"path": "exercices-optimisation"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "hello-react"
+	}
 }
