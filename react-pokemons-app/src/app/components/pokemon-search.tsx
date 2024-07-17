@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import { searchPokemon } from '../services/pokemon-service';

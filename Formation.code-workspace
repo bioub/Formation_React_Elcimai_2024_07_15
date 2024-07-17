@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "hello-react"
+		},
+		{
+			"path": "react-pokemons-app"
+		},
+		{
+			"path": "react-communication"
+		},
+		{
+			"path": "exercices-optimisation"
+		}
+	],
+	"settings": {}
+}
