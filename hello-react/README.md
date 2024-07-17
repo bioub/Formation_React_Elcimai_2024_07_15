@@ -1,30 +1,19 @@
-# React + TypeScript + Vite
+# Exercices
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tester de fonctions
 
-Currently, two official plugins are available:
+Tester `pairs.ts` et `racineCarre.ts`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Vérifier avec `npx vitest --dom --coverage` que 100% des lignes soit couvertes dans ces 2 fichiers (installer la lib demandée).
 
-## Expanding the ESLint configuration
+## Tester des composant React
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Tester `Select.tsx` :
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- vérifier que le composant "render"
+- vérifier qu'il affiche la valeur sélectionné
+- vérifier qu'en cliquant sur la valeur sélectionnée le menu s'ouvre
+- vérifier qu'en cliquant sur un item le callback `onSelected` soit appelé avec la bonne valeur (ouvrir le menu au préalable)
+- vérifier qu'en cliquant sur `window` le menu se referme (ouvrir le menu au préalable)
+- créer une ref avec `createRef` de React (`useRef` ne pouvant s'utiliser que dans un composant)
+la passer à `<Select>` et vérifier qu'en appelant `openMenu` le menu s'ouvre bien
